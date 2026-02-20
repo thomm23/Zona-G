@@ -1,0 +1,15 @@
+en parte de agregar reparacion:
+-cuando vas agregar 1 reparacion aparecen de nuevo los datos del cliente, ver si se puede completar mediante 1 id para no cargar varias veces los mismos datos ✅
+-ESTADO al ingresar tiene que ser definido por default en el valor "en proceso" ya que el estado deberia manejarse en otra pantalla de administracion de reparaciones✅
+-recibido por: vamos a hacer que sea un desplegable que solo tenga los valores "Leonel - Mariana"❌
+-Deposito sacarle los botones de aumento de valor y asegurarse que sea un valor INT ❌
+-en fecha estimada no deberias poder elegir dias que ya pasaron ❌
+-agregar si tiene contraseña, cual es y guardarla (encriptada) ❌
+-si tiene patron de desbloqueo ni idea :v ✅
+
+
+
+
+-AGREGAR UNA PANTALLLA DE ADMINISTRACION DE REPARACIONES
+-ESTADISTICAS PROBABLEMENTE NO EXISTA
+
