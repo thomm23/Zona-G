@@ -1,0 +1,141 @@
+.client-selector {
+  margin: 8px 0 16px 0;
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.client-selector h3 {
+  margin: 0 0 12px;
+  font-size: 1rem;
+}
+
+.recent-section {
+  margin-bottom: 16px;
+}
+
+.section-label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.recent-clients {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.recent-client-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 8px 12px;
+  background: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.85rem;
+}
+
+.recent-client-btn:hover {
+  background: #e5e7eb;
+  border-color: #0b74de;
+}
+
+.recent-client-btn strong {
+  font-weight: 600;
+  color: #111827;
+}
+
+.recent-client-btn small {
+  color: #666;
+  font-size: 0.75rem;
+  margin-top: 2px;
+}
+
+.search-section {
+  margin-bottom: 12px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #cfcfcf;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  background: #fafafa;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #0b74de;
+  background: #fff;
+}
+
+.search-results {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.clients-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.client-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 10px 12px;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s;
+  font-weight: normal;
+  color: #111827;
+}
+
+.client-item:hover {
+  background: #e0e7ff;
+  border-color: #0b74de;
+}
+
+.client-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.client-details {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: #666;
+  margin-top: 4px;
+}
+
+.no-results {
+  padding: 16px;
+  text-align: center;
+  color: #999;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .recent-clients {
+    flex-direction: column;
+  }
+  
+  .recent-client-btn {
+    width: 100%;
+  }
+}

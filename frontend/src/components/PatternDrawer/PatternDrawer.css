@@ -1,0 +1,104 @@
+.pattern-drawer {
+  background: #fff;
+  border: 1px solid #e6e6e6;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pattern-header {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.pattern-header h3 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.pattern-header small {
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.pattern-canvas {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  cursor: crosshair;
+  background: #fff;
+  margin-bottom: 12px;
+}
+
+.pattern-display {
+  margin-bottom: 12px;
+  padding: 12px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.pattern-sequence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.95rem;
+}
+
+.pattern-sequence strong {
+  font-weight: 600;
+}
+
+.pattern-sequence span {
+  color: #0b74de;
+  font-family: monospace;
+  font-weight: 500;
+}
+
+.pattern-actions {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  max-width: 300px;
+}
+
+.pattern-actions button {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: none;
+  background: #0b74de;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.pattern-actions button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.pattern-actions button.secondary {
+  background: #f3f4f6;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+}
+
+.pattern-actions button.secondary:hover:not(:disabled) {
+  background: #e5e7eb;
+}
+
+@media (max-width: 720px) {
+  .pattern-drawer {
+    padding: 12px;
+  }
+
+  .pattern-canvas {
+    max-width: 100%;
+  }
+}
