@@ -17,10 +17,13 @@ export default function ClientSelector({ onSelect }) {
         if (!mounted) return;
         setClients(res.data || []);
         
-        // Cargar clientes recientes del localStorage
-        const stored = localStorage.getItem("recentClients");
-        const recent = stored ? JSON.parse(stored) : [];
-        setRecentClients(recent);
+        try {
+          const stored = localStorage.getItem("recentClients");
+          const recent = stored ? JSON.parse(stored) : [];
+          setRecentClients(recent);
+        } catch {
+          setRecentClients([]);
+        }
       } catch (err) {
         console.error("Error cargando clientes:", err);
       } finally {
@@ -47,18 +50,19 @@ export default function ClientSelector({ onSelect }) {
   }, [searchTerm, clients]);
 
   const handleSelectClient = (client) => {
-    // Guardar en clientes recientes
     const id = client._id || client.id || client.insertId || "";
-    const stored = localStorage.getItem("recentClients");
-    let recent = stored ? JSON.parse(stored) : [];
     
-    // Remover si ya existe y agregar al inicio
-    recent = recent.filter((c) => (c._id || c.id) !== id);
-    recent.unshift(client);
-    
-    // Guardar solo últimos 10
-    recent = recent.slice(0, 10);
-    localStorage.setItem("recentClients", JSON.stringify(recent));
+    try {
+      const stored = localStorage.getItem("recentClients");
+      let recent = stored ? JSON.parse(stored) : [];
+      
+      recent = recent.filter((c) => (c._id || c.id) !== id);
+      recent.unshift(client);
+      recent = recent.slice(0, 10);
+      localStorage.setItem("recentClients", JSON.stringify(recent));
+    } catch {
+      // Silently fail if localStorage is not available
+    }
     
     if (onSelect) onSelect(client);
     setSearchTerm("");

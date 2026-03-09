@@ -1,8 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
 import "./ManageRepairs.css";
+
+const STATUS_COLORS = {
+  "en proceso": "#FFA500",
+  "lista": "#4CAF50",
+  "cancelada": "#f44336",
+};
+
+const getStatusColor = (status) => STATUS_COLORS[status] || "#888";
 
 function ManageRepairs({ usuario, onLogout }) {
   const navigate = useNavigate();
@@ -136,23 +144,19 @@ function ManageRepairs({ usuario, onLogout }) {
     }
   };
 
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "en proceso":
-        return "#FFA500";
-      case "lista":
-        return "#4CAF50";
-      case "cancelada":
-        return "#f44336";
-      default:
-        return "#888";
-    }
-  };
-
-  const filteredRepairs =
-    filterStatus === "todos"
+  const filteredRepairs = useMemo(
+    () => filterStatus === "todos"
       ? repairs
-      : repairs.filter((r) => r.servicio?.estado === filterStatus);
+      : repairs.filter((r) => r.servicio?.estado === filterStatus),
+    [repairs, filterStatus]
+  );
+
+  const repairCounts = useMemo(() => ({
+    todos: repairs.length,
+    enProceso: repairs.filter((r) => r.servicio?.estado === "en proceso").length,
+    lista: repairs.filter((r) => r.servicio?.estado === "lista").length,
+    cancelada: repairs.filter((r) => r.servicio?.estado === "cancelada").length,
+  }), [repairs]);
 
   if (loading) return <div className="loading">Cargando reparaciones...</div>;
 
@@ -175,25 +179,25 @@ function ManageRepairs({ usuario, onLogout }) {
           className={filterStatus === "todos" ? "active" : ""}
           onClick={() => setFilterStatus("todos")}
         >
-          Todas ({repairs.length})
+          Todas ({repairCounts.todos})
         </button>
         <button
           className={filterStatus === "en proceso" ? "active" : ""}
           onClick={() => setFilterStatus("en proceso")}
         >
-          En proceso ({repairs.filter((r) => r.servicio?.estado === "en proceso").length})
+          En proceso ({repairCounts.enProceso})
         </button>
         <button
           className={filterStatus === "lista" ? "active" : ""}
           onClick={() => setFilterStatus("lista")}
         >
-          Listas ({repairs.filter((r) => r.servicio?.estado === "lista").length})
+          Listas ({repairCounts.lista})
         </button>
         <button
           className={filterStatus === "cancelada" ? "active" : ""}
           onClick={() => setFilterStatus("cancelada")}
         >
-          Canceladas ({repairs.filter((r) => r.servicio?.estado === "cancelada").length})
+          Canceladas ({repairCounts.cancelada})
         </button>
       </div>
 

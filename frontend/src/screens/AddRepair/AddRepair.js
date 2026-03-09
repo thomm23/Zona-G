@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -16,7 +16,7 @@ export default function AddRepair({ usuario, onLogout }) {
   const [selectedClient, setSelectedClient] = useState(location.state?.client || null);
   const [alertMessage, setAlertMessage] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
-  const { client: clientData, loading: loadingClient } = useClient(clientId, selectedClient);
+  const { client: clientData } = useClient(clientId, selectedClient);
 
   const handleLogout = () => {
     if (window.confirm('¿Estás seguro de que quieres cerrar sesión?')) {
@@ -144,7 +144,12 @@ export default function AddRepair({ usuario, onLogout }) {
         <button className="btn-logout" onClick={handleLogout}>Cerrar Sesión</button>
       </div>
       <header className="add-repair-header">
-        <h1>📱 Agregar Reparación</h1>
+        <div className="header-with-back">
+          <button type="button" className="btn-back" onClick={() => navigate(-1)}>
+            ← Volver
+          </button>
+          <h1>📱 Agregar Reparación</h1>
+        </div>
 
         {clientId && clientData && (
           <div className="client-info-card">

@@ -1,101 +1,116 @@
 .pattern-drawer {
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .pattern-header {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   text-align: center;
 }
 
 .pattern-header h3 {
-  margin: 0 0 4px;
-  font-size: 1.05rem;
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
 }
 
 .pattern-header small {
-  color: #666;
-  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-size: 13px;
 }
 
 .pattern-canvas {
   display: block;
   width: 100%;
-  max-width: 300px;
-  border: 2px solid #e5e7eb;
-  border-radius: 8px;
+  max-width: 280px;
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
   cursor: crosshair;
-  background: #fff;
-  margin-bottom: 12px;
+  background: var(--bg-secondary);
+  margin-bottom: 16px;
 }
 
 .pattern-display {
-  margin-bottom: 12px;
-  padding: 12px;
-  background: #f9fafb;
-  border-radius: 6px;
+  margin-bottom: 16px;
+  padding: 14px 18px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+  width: 100%;
+  max-width: 280px;
 }
 
 .pattern-sequence {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  font-size: 0.95rem;
+  font-size: 14px;
 }
 
 .pattern-sequence strong {
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--text-secondary);
 }
 
 .pattern-sequence span {
-  color: #0b74de;
-  font-family: monospace;
+  color: var(--accent-primary);
+  font-family: 'JetBrains Mono', monospace;
   font-weight: 500;
 }
 
 .pattern-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   width: 100%;
-  max-width: 300px;
+  max-width: 280px;
 }
 
 .pattern-actions button {
   flex: 1;
-  padding: 10px 14px;
-  border-radius: 6px;
+  padding: 12px 16px;
+  border-radius: 8px;
   border: none;
-  background: #0b74de;
-  color: #fff;
+  background: var(--accent-primary);
+  color: #000;
   cursor: pointer;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.pattern-actions button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.25);
 }
 
 .pattern-actions button:disabled {
-  background: #ccc;
+  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .pattern-actions button.secondary {
-  background: #f3f4f6;
-  color: #111827;
-  border: 1px solid #e5e7eb;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
 }
 
 .pattern-actions button.secondary:hover:not(:disabled) {
-  background: #e5e7eb;
+  background: var(--bg-card);
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: none;
 }
 
 @media (max-width: 720px) {
   .pattern-drawer {
-    padding: 12px;
+    padding: 16px;
   }
 
   .pattern-canvas {

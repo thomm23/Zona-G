@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import "./PatternDrawer.css";
 
 export default function PatternDrawer({ onPatternChange, initialPattern = "" }) {
@@ -13,36 +13,16 @@ export default function PatternDrawer({ onPatternChange, initialPattern = "" }) 
   const PADDING = 50;
   const SPACING = (CANVAS_SIZE - 2 * PADDING) / (GRID_SIZE - 1);
 
-  // Inicializar canvas
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext("2d");
-    canvas.width = CANVAS_SIZE;
-    canvas.height = CANVAS_SIZE;
-    
-    redraw(ctx, pattern, null);
-  }, []);
+  const getDotPosition = useCallback((num) => {
+    const row = Math.floor((num - 1) / GRID_SIZE);
+    const col = (num - 1) % GRID_SIZE;
+    return {
+      x: PADDING + col * SPACING,
+      y: PADDING + row * SPACING,
+    };
+  }, [SPACING, PADDING]);
 
-  // Redraw cuando cambia el patrón
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    
-    const ctx = canvas.getContext("2d");
-    redraw(ctx, pattern, mousePos);
-  }, [pattern, mousePos]);
-
-  // Cargar patrón inicial si existe
-  useEffect(() => {
-    if (initialPattern) {
-      const nums = initialPattern.split("-").map(n => parseInt(n)).filter(n => !isNaN(n));
-      setPattern(nums);
-    }
-  }, [initialPattern]);
-
-  const redraw = (ctx, currentPattern, mouse) => {
+  const redraw = useCallback((ctx, currentPattern, mouse) => {
     // Limpiar canvas
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
@@ -92,16 +72,36 @@ export default function PatternDrawer({ onPatternChange, initialPattern = "" }) 
       ctx.textBaseline = "middle";
       ctx.fillText(i, pos.x, pos.y);
     }
-  };
+  }, [getDotPosition, isDrawing]);
 
-  const getDotPosition = (num) => {
-    const row = Math.floor((num - 1) / GRID_SIZE);
-    const col = (num - 1) % GRID_SIZE;
-    return {
-      x: PADDING + col * SPACING,
-      y: PADDING + row * SPACING,
-    };
-  };
+  // Inicializar canvas
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext("2d");
+    canvas.width = CANVAS_SIZE;
+    canvas.height = CANVAS_SIZE;
+    
+    redraw(ctx, pattern, null);
+  }, [redraw, pattern]);
+
+  // Redraw cuando cambia el patrón
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext("2d");
+    redraw(ctx, pattern, mousePos);
+  }, [redraw, pattern, mousePos]);
+
+  // Cargar patrón inicial si existe
+  useEffect(() => {
+    if (initialPattern) {
+      const nums = initialPattern.split("-").map(n => parseInt(n)).filter(n => !isNaN(n));
+      setPattern(nums);
+    }
+  }, [initialPattern]);
 
   const getDotAtPosition = (x, y) => {
     for (let i = 1; i <= 9; i++) {

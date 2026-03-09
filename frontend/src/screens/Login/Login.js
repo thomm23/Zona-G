@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Login.css";
+import API_BASE_URL from "../../config/api";
 
 function Login({ onLogin }) {
   const [usuario, setUsuario] = useState("");
@@ -14,7 +15,7 @@ function Login({ onLogin }) {
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:4000/auth/login", {
+      const response = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +54,10 @@ function Login({ onLogin }) {
   return (
     <div className="login-container">
       <div className="login-box">
-        <h1>🔐 Zona-G Login</h1>
+        <div className="login-logo">
+          <span>📱</span>
+        </div>
+        <h1>Zona-G</h1>
         <p className="subtitle">Administración de Reparaciones</p>
 
         <form onSubmit={handleSubmit}>
@@ -99,10 +103,6 @@ function Login({ onLogin }) {
             {loading ? "Cargando..." : "Iniciar Sesión"}
           </button>
         </form>
-
-        <p className="demo-info">
-          Demo: usuario: <strong>admin</strong> | contraseña: <strong>admin123</strong>
-        </p>
       </div>
     </div>
   );

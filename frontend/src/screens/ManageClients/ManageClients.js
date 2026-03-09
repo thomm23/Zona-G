@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Modal from "../../components/Modal/Modal";
@@ -80,10 +80,13 @@ function ManageClients({ usuario, onLogout }) {
     }
   };
 
-  const filteredClients = clients.filter(client =>
-    client.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.telefono.includes(searchTerm) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredClients = useMemo(() => 
+    clients.filter(client =>
+      client.nombre.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      client.telefono.includes(searchTerm) ||
+      client.email.toLowerCase().includes(searchTerm.toLowerCase())
+    ),
+    [clients, searchTerm]
   );
 
   if (loading) return <div className="loading">Cargando clientes...</div>;

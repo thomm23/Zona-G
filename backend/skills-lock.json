@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "backend-testing": {
+      "source": "supercent-io/skills-template",
+      "sourceType": "github",
+      "computedHash": "690311c76efdae3d1fe8fcf1782c5610ee2e96e88d7156df2bc2d711d29050fc"
+    }
+  }
+}
