@@ -9,7 +9,7 @@ const { iniciarBackupAutomatico } = require('./utils/backup');
 const { iniciarRecordatoriosAutomaticos } = require('./utils/recordatorios');
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(cors());
 app.use(express.json());
@@ -29,5 +29,5 @@ app.use('/clientes', clientesRoutes);
 app.use('/reparaciones', reparacionesRoutes);
 
 app.listen(PORT, () => {
-  console.log(`🚀 Servidor backend escuchando en http://localhost:${PORT}`);
+  console.log(`🚀 Servidor backend escuchando en puerto ${PORT}`);
 });
